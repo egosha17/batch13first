@@ -27,3 +27,5 @@ public class Calculator {
         return lp;
     }
 }
+
+//feature 2 gonna be tested
