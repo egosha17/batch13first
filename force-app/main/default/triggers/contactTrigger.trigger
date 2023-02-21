@@ -1,10 +1,10 @@
-trigger contactTrigger on Contact (before update, after update) {
-    System.debug('--Trigger Started');
-    if (trigger.isUpdate && trigger.isBefore){
-        System.debug('before triggered');
+trigger contactTrigger on Contact (before insert, after insert, before update, after update, after undelete, after delete) {
+    if (Trigger.isBefore && Trigger.isUpdate) {
+        //call validation method here.
+        //ContactTriggerHandler.contactValidation1(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
+        ContactTriggerHandler.contactValidation2(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
     }
-    if (trigger.isUpdate && trigger.isAfter){
-        System.debug('after triggered');
+    if(Trigger.isAfter){
+        ContactTriggerHandler.rollUpSummary(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
     }
-    System.debug('***Trigger Finished***');
 }
