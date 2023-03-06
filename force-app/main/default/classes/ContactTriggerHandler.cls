@@ -62,7 +62,7 @@ public class ContactTriggerHandler {
         }
         system.debug('account ids ' + accIds);
 
-        List<account> listAccount = [select id, number_of_contacts__c, (select id from contacts) from account 
+        List<account> listAccount = [select id, number_of_contacts_del__c, (select id from contacts) from account 
                                     where id in :accIds];
         for(account eachAcc: listAccount){
 
@@ -71,7 +71,7 @@ public class ContactTriggerHandler {
                 numOfContacts = eachAcc.Contacts.size();
             }
             //set number of contact's field value to SIZE
-            eachAcc.number_of_contacts__c = numOfContacts;
+            eachAcc.number_of_contacts_del__c = numOfContacts;
         }
         if(!listAccount.isEmpty()){
             update listAccount;

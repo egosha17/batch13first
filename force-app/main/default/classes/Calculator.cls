@@ -1,29 +1,42 @@
 public class Calculator {
-    public String printAndReturnMessage(String m){
-        privateMessageTest(m);
-        String returnStr = '';
-        returnStr = m + ' ...OK Cool';
+      //parameterless method.
+      public void welcomeMessage(){
+        system.debug('welcome to apex calc');
+        printNewMessage('welcome welcome');
+    }
+    //parameterized method.
+    //parameter: string 
+    // it accepts a string, and prints it. That's it
+    public void printNewMessage(string msg){
+        system.debug(msg);
+    }
+
+    void privatePrintMessage(string msg){
+        system.debug('inside private method NOOWW');
+        system.debug(msg);
+        system.debug('done with private');
+    }
+
+    public string printAndReturnMessage(string m){
+        privatePrintMessage(m); 
+        string returnStr = '';
+        returnStr = m + '...Ok cool';
         return returnStr;
     }
-    void privateMessageTest(String msg){
-        System.debug('We are in Private NOW');
-        System.debug(msg);
-        System.debug('Private MEthod Completed');
-
-    }
-
-    public Integer add(integer a, integer b){
-        sum = a+b;
+    public integer add(integer a, integer b){
+        integer sum = a + b;
         return sum;
     }
-    public Integer add(integer x ,integer z, Integer y){
-        sum=x+z+y;
+    public integer add(integer x, integer y, integer z){
+        integer sum = x+y+z;
         return sum;
     }
 
-    public Boolean leapYearCheck(Date dt){
-        Integer year = dt.year();
-        Boolean lp = date.isLeapYear(year);
+    public boolean leapYearCheck(date dt){
+        //using date we get year component
+        integer year = dt.year();
+        //using year, we can check leap year using isLeapYear method
+        boolean lp = date.isLeapYear(year);
         return lp;
     }
 }

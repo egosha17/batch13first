@@ -1,18 +1,29 @@
 trigger AccountTrigger on Account (before insert, before update, after insert, after update) {
     system.debug('--- trigger start ----');
-
-    //isAfter will be true in 'after insert' and 'after update' trigger
-    List<account> newAccounts = trigger.new;
-    if(trigger.isAfter){
-        //trigger.new we get latest inserted/updated records
-        system.debug('after trigger, new data --> ' + newAccounts);
-        for (Account AccVar : newAccounts) {
-            System.debug(AccVar);
-        }
-        system.debug('number of records inserted/updated: ' + newAccounts.size() );
+    if (Trigger.isBefore) {
+        AccountTriggerHandler.updateDescription(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
+    }
+    if (Trigger.isAfter && Trigger.isUpdate) {
+        //call VIP update method.
+        AccountTriggerHandler.updateVIPForAllContact(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
     }
 
-    system.debug('==== trigger end ====');
+ 
+ 
+    // system.debug('--- trigger start ----');
+
+    // //isAfter will be true in 'after insert' and 'after update' trigger
+    // List<account> newAccounts = trigger.new;
+    // if(trigger.isAfter){
+    //     //trigger.new we get latest inserted/updated records
+    //     system.debug('after trigger, new data --> ' + newAccounts);
+    //     for (Account AccVar : newAccounts) {
+    //         System.debug(AccVar);
+    //     }
+    //     system.debug('number of records inserted/updated: ' + newAccounts.size() );
+    // }
+
+    // system.debug('==== trigger end ====');
 
 /*
     if(Trigger.isBefore){

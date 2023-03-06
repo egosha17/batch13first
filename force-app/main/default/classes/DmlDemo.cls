@@ -10,16 +10,16 @@ public class DmlDemo {
         system.debug(acc);
     }
 
-    // public static void dmlInsertDemo_cstmObj() {
-    //     //create instance
-    //     Salesforce_Project__c sp = new Salesforce_Project__c();
-    //     //set field names
-    //     sp.Project_Name__c = 'Learn dml batch 13';
-    //     sp.Description__c = 'doing good everybody';
+    public static void dmlInsertDemo_cstmObj() {
+        //create instance
+        Salesforce_Project__c sp = new Salesforce_Project__c();
+        //set field names
+        sp.Project_Name__c = 'Learn dml batch 13';
+        sp.Description__c = 'doing good everybody';
 
-    //     //save it by 'insert dml'
-    //     insert sp;
-    // }
+        //save it by 'insert dml'
+        insert sp;
+    }
 
     public static void dmlupdateDemo_stndObj1() {
         Account ac = new account();
@@ -59,20 +59,20 @@ public class DmlDemo {
         insert c;
     }
 
-    // public static void dmlInsertDemo_cstmObj2() {
-    //     //soql query to get project
-    //     Salesforce_Project__c sp = [select id, name from Salesforce_Project__c ORDER BY CreatedDate desc limit 1];
+    public static void dmlInsertDemo_cstmObj2() {
+        //soql query to get project
+        Salesforce_Project__c sp = [select id, name from Salesforce_Project__c ORDER BY CreatedDate desc limit 1];
         
-    //     //create ticket
-    //     Salesforce_Ticket__c newST = new Salesforce_Ticket__c();
-    //     newST.Subject__c = 'create related record';
-    //     newST.Priority__c = 'High';
-    //     newST.Requested_by_date__c = date.today();
-    //     newST.Status__c = 'New';
-    //     //relationship field
-    //     newST.Salesforce_Project__c = sp.Id;
-    //     insert newST;
-    // }
+        //create ticket
+        Salesforce_Ticket__c newST = new Salesforce_Ticket__c();
+        newST.Subject__c = 'create related record';
+        newST.Priority__c = 'High';
+        newST.Requested_by_date__c = date.today();
+        newST.Status__c = 'New';
+        //relationship field
+        newST.Salesforce_Project__c = sp.Id;
+        insert newST;
+    }
 
     public static void dmlInsertDemo_wrong1() {
         for (Integer i = 0; i < 155; i++) {
@@ -142,6 +142,9 @@ public class DmlDemo {
         for (account eachAcc : listAccount) {
             if (eachAcc.Active__c == 'Yes') {
                 eachAcc.Name += ' Yy';
+                updateAccount.add(eachAcc);
+            } else if(eachAcc.Active__c == null){
+                eachAcc.Name += ' Nn';
                 updateAccount.add(eachAcc);
             }
         }
